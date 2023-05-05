@@ -1,0 +1,32 @@
+# https://taskfile.dev
+
+version: '3'
+
+vars:
+  GREETING: Hello, World!
+
+tasks:
+  default:
+    cmds:
+      - echo "{{.GREETING}}"
+    silent: true
+
+  test01:
+    cmds:
+      - poetry run uvicorn test01:app --port 8001
+    silent: true
+
+  test02:
+    cmds:
+      - poetry run uvicorn test02:app --port 8001
+    silent: true
+
+  test03:
+    cmds:
+      - poetry run uvicorn test03:app --port 8001
+    silent: true
+
+  test04:
+    cmds:
+      - poetry run uvicorn test04:app --port 8001
+    silent: true

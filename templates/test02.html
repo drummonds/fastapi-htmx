@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script
+      src="https://unpkg.com/htmx.org@1.9.2"
+      integrity="sha384-L6OqL9pRWyyFU3+/bjdSri+iIphTN/bvYyM37tICVyOJkWZLpP2vGn6VUEXgzg6h"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div>
+        <p>This demonstrates mouse enter and leaving an element but
+            has a bug in that the mouse enter event fires repeatedly
+            but the mouse leave or mouse out event does not.
+        </p>
+    </div>
+    <div
+      hx-post="/mouse_leave"
+      hx-trigger="load delay:0.5s"
+      hx-swap="outerHTML"
+    >
+      [Waiting for loading]
+    </div>
+    <div>
+        <h3>Test02
+        </h3>
+  </body>
+</html>
