@@ -30,3 +30,8 @@ tasks:
     cmds:
       - poetry run uvicorn test04:app --port 8001
     silent: true
+
+  test05:
+    cmds:
+      - poetry run uvicorn test05:app --port 8001
+    silent: true

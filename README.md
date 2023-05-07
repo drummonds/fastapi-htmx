@@ -31,4 +31,23 @@ This doesn't actually work very well as the leave or out event is not triggered 
 
  Going to make it a little prettier by using [Bulma](https://bulma.io/) as a CSS framerwork.  I have seen some nice things done with it and thing it wil be quite simple to use.
 
- 
+ # Test05
+
+ This is going to be a simple simulated app with a stop/start toggle button which will display scrolling
+ text using a simple pattern like normal printing.  However the aim will be to cache the output in browser.  So a browser refresh will clear the scrolling output.
+
+ Going to use a very simple polling technique to transfer that data rather than a more elaborate SSE or websocket.
+
+ The aim is that is that this is more explicit and less magic than say [PyWebio](https://www.pyweb.io/) or [Streamlit](https://streamlit.io/) and therefore easier to see
+ what is going and take control of.
+
+ ## Development problems
+
+ during develoment I tried:
+ ```
+  <div hx-get="/terminal" hx-trigger="every 2s" hx-target="afterend">
+              <h3>Test terminal output</h3>
+            </div>```
+
+but it didnt seemt to poll as I expected it should and docmentation said it should.  No events were shown in the app log.  Opening the console log showed a targetError.
+
