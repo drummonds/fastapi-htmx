@@ -51,3 +51,11 @@ This doesn't actually work very well as the leave or out event is not triggered 
 
 but it didnt seemt to poll as I expected it should and docmentation said it should.  No events were shown in the app log.  Opening the console log showed a targetError.
 
+Replaced hx-target with hx-swap fixed the issue.
+
+## Conclusion of test05
+
+It is a very simple system but not as clean as nicegui or pywebio.  It has taken 52 lines of code and 4 html files to get a basic app.  However I feel that it is going to be a great basis for building from.
+
+I am interested in doing it in go and wasm for static sites.  The go is likely be much cleaner and simpler, the wasm for static websites slightly trickier.
+

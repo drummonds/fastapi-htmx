@@ -19,6 +19,7 @@ run = False
 
 @app.post("/start", response_class=HTMLResponse)
 async def read_item(request: Request):
+    global run
     run = True
     asyncio.create_task(worker( queue))
     return templates.TemplateResponse("test05_start.html", {"request": request})
@@ -27,7 +28,7 @@ async def worker(queue):
     environment = Environment(loader=FileSystemLoader("templates/"))
     template = environment.get_template("test05_print.html")
     i = 0
-    while i < 20: # and run:
+    while i < 20 and run:
         i += 1
         content = template.render({"output": f"Output {i}"})
         queue.put_nowait(content)
@@ -35,6 +36,7 @@ async def worker(queue):
 
 @app.post("/stop", response_class=HTMLResponse)
 async def read_item(request: Request):
+    global run
     run = False
     return templates.TemplateResponse("test05_stop.html", {"request": request})
 
