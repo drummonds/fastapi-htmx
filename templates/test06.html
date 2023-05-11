@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" class="has-navbar-fixed-top">
+  <head>
+    <script
+      src="https://unpkg.com/htmx.org@1.9.2"
+      integrity="sha384-L6OqL9pRWyyFU3+/bjdSri+iIphTN/bvYyM37tICVyOJkWZLpP2vGn6VUEXgzg6h"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/brython@3.11.0/brython.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/brython@3.11.0/brython_stdlib.js"
+    ></script>
+  </head>
+  <body onload="brython()">
+    <nav
+      class="navbar is-fixed-top"
+      role="navigation"
+      aria-label="main navigation"
+    >
+      <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-start">
+          <div class="navbar-item">
+            <div
+              id="brython_demo"
+              hx-post="/stop"
+              hx-trigger="load delay:0.5s"
+              hx-swap="outerHTML"
+            >
+              [Waiting for loading]
+            </div>
+          </div>
+          <div class="navbar-item">
+            <button id = "cancel" class="button is-primary is-light">Cancel</button>
+          </div>
+          <div class="navbar-item">
+            <button id = "measure" class="button is-danger is-light">Measure</button>
+          </div>
+          <div class="navbar-item">
+            <button class="button is-danger is-light">Calibrate</button>
+          </div>
+          <a id="state" class="navbar-item"> Home </a>
+          <div class="navbar-item">Test06 V0.1.4</div>
+        </div>
+      </div>
+    </nav>
+    <div class="columns">
+      <div class="column is-6 is-offset-2">
+        <article class="tile is-child box">
+          <div>
+            <p class="title">Demo</p>
+            <div id="terminal" hx-get="/terminal" hx-trigger="every 1s" hx-swap="beforeend">
+              <h3>Test terminal output start</h3>
+            </div>
+          </div>
+        </article>
+      </div>
+      <div class="column is-4">
+        <article class="tile is-child box">
+          <p class="title">Info</p>
+          <div class="content">
+            <p>
+              This demonstrates click toggle and a terminal output simulation.
+            </p>
+            <script type="text/python">
+              from browser import document, alert
+
+              # Connect to DOM elements
+              cancel = document["cancel"]
+              measure = document["measure"]
+              state_click = document["state"]
+              state = 0
+
+
+              def test(ev):
+                  # These elements are HTMX so change, so need to be found each event
+                  run = document["brython_demo"]
+                  terminal = document["terminal"]
+                  global state
+                  if state == 0:
+                      cancel.classList.remove("is-success")
+                      cancel.classList.add("is-light")
+                      cancel.classList.add("is-warning")
+                      run.classList.remove("is-success`")
+                      run.classList.add("is-warning")
+                      state = 1
+                  elif state == 1:
+                      cancel.classList.remove("is-warning")
+                      cancel.classList.add("is-info")
+                      state = 2
+                      alert(f'Refresh = {terminal.attrs["hx-trigger"]}')
+                      terminal.attrs["hx-trigger"]="every 5s"
+                  else:
+                      cancel.classList.remove("is-info")
+                      cancel.classList.remove("is-light")
+                      cancel.classList.add("is_success")
+                      run.classList.remove("is-warning")
+                      run.classList.add("is-success")
+                      state = 0
+                  state_click.textContent = f"State {state}"
+
+              document["test"].bind("click", test)
+            </script>
+            <p>
+              <button id="test" class="button">Test measure</button>
+            </p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </body>
+</html>

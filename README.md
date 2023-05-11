@@ -59,3 +59,15 @@ It is a very simple system but not as clean as nicegui or pywebio.  It has taken
 
 I am interested in doing it in go and wasm for static sites.  The go is likely be much cleaner and simpler, the wasm for static websites slightly trickier.
 
+## Brython as controller test06
+
+On reflection if you have a model view controller architecture you need to move the controller to the browser.  Going to try Brython for this.
+
+## Test07
+
+I realised that actually the UK gov approach https://www.gov.uk/service-manual/technology/using-progressive-enhancement of using basic HTML is perhaps the way forward and concentrating on simple html.
+
+Polling of state can be done by refreshing state with all state held on the server.  This should work for Python, go and wasm static site deployments.
+
+So this does work quite nicely and quite simply.  It requires fastapi, bulma to make it look pretty and a slightly janky polling by refresh which is very simple.  There is no client side javascript or python.
+
